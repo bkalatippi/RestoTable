@@ -1,0 +1,36 @@
+<div class="container"
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayout.xs="column"
+    fxLayoutAlign.gt-md="space-around center"
+    fxLayoutGap="10px" 
+    fxLayoutGap.xs="0">
+
+  <div fxFlex="40">
+    <div fxFlex *ngIf="dish" [@expand]>
+	    <mat-card>
+	      <mat-card-header>
+	        <mat-card-title>
+	          <h3>{{dish.name | uppercase}}</h3>
+	        </mat-card-title>
+	      </mat-card-header>
+	      <img mat-card-image src="{{ BaseURL + dish.image }}" alt={{dish.name}}>
+	      <mat-card-content>
+	        <p>Details: {{dish.description}}</p>
+	        <p>Price: {{dish.price | number : '1.2'}}</p>
+	      </mat-card-content>
+	      <mat-card-actions>
+	      	<button mat-button (click)="goBack()">BACK</button>
+	      </mat-card-actions>
+	    </mat-card>
+  	</div>
+  </div>
+  <div fxFlex [hidden]="dish || errMess">
+    <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
+  
+  <div fxFlex *ngIf="errMess">
+    <h2>Error</h2>
+    <h4>{{errMess}}</h4>
+  </div>
+</div>

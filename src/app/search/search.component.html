@@ -1,0 +1,59 @@
+<div fxFlex="100" *ngIf="restaurants" [@expand]>
+	    <mat-card fxFlex>
+		  <mat-card-header>
+		    <div mat-card-avatar></div>
+		    <div *ngIf="search.city && search.searchText">
+			    <mat-card-title>
+			      <h1>Restaurants in {{search.city}} matching "{{search.searchText}}"</h1>
+			    </mat-card-title>
+			 </div>
+			 <div *ngIf="!search.city && search.searchText">
+			    <mat-card-title>
+			      <h1>Restaurants in All Cities matching "{{search.searchText}}"</h1>
+			    </mat-card-title>
+			 </div>
+			 <div *ngIf="search.city && !search.searchText">
+			    <mat-card-title>
+			      <h1>Restaurants in {{search.city}}</h1>
+			    </mat-card-title>
+			 </div>
+			 <div *ngIf="!search.city && !search.searchText">
+			    <mat-card-title>
+			      <h1>All Restaurants</h1>
+			    </mat-card-title>
+			 </div>
+		  </mat-card-header>
+		  <mat-card-content>
+		    <mat-list>
+				 <mat-list-item *ngFor="let restaurant of restaurants">
+				 	 <div><p matLine><img src="{{BaseURL + restaurant.image}}" alt={{restaurant.name}}></p> </div>
+				   	 <div style="margin-left: 15px;"><h2><p matLine>  {{restaurant.name}}</p></h2>
+						 <p matLine>  Address: {{restaurant.address.address1}}, {{restaurant.address.address2}}, {{restaurant.address.city}}, {{restaurant.address.state}}, {{restaurant.address.pin}}</p>
+						 <p matLine>  Cuisines: {{restaurant.cuisine}}</p>
+						 <p matLine>  Cost For 2(approx.): Rs.{{restaurant.costfor2 | number:'1.2'}}</p>
+						 <p matLine>  Hours: {{restaurant.workingHrsFrom}} to {{restaurant.workingHrsTo}} (Mon - Sun)</p>
+						 <p matLine>
+							<button mat-button class="fa fa-phone" (click)="showPhoneNumber(restaurant.name, restaurant.phone)"> Call </button>
+					        <button mat-button class="fa fa-bars" [routerLink]="['/restaurants', restaurant.id]"> View Menu </button>
+					        <button mat-button class="fa fa-calendar" [routerLink]="['/book', restaurant.id]"> Book a Table </button>
+						 </p>
+						 <mat-divider></mat-divider>
+					 </div>
+				 </mat-list-item>
+			</mat-list>
+		  </mat-card-content>
+		  <mat-card-actions>
+		  	<div>
+	      		<button mat-button (click)="goBack()">BACK</button>
+	      	</div>
+	      </mat-card-actions>
+		</mat-card>
+</div>
+
+<div fxFlex [hidden]="restaurants || searchErrMess">
+  <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+</div>
+<div fxFlex *ngIf="searchErrMess">
+   <h2>Error</h2>
+   <h4>{{searchErrMess}}</h4>
+</div>

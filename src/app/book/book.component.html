@@ -1,0 +1,86 @@
+<div class="container"
+  fxLayout="column"
+  fxLayoutGap="10px">
+
+  <div fxFlex>
+    <div>
+        <h1>{{restaurant.name}}</h1>
+        <hr>
+    </div>
+  </div>
+
+  <div fxFlex>
+  </div>
+  
+  <div fxFlex fxFlexOffset="20px" class="form-size" [@expand] *ngIf="booking">
+    <h3>1. Please select your booking details</h3>
+    <form novalidate [formGroup]="bookingForm" #bform="ngForm" (ngSubmit)="onSubmit()">
+      <p>Select a Date: 
+        <mat-form-field class="half-width">
+			  <input matInput [matDatepicker]="picker" formControlName="date" placeholder="Select a date">
+			  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+			  <mat-datepicker #picker></mat-datepicker>
+	          <mat-error *ngIf="formErrors.date">{{formErrors.date}}</mat-error>
+        </mat-form-field>
+        
+        Number Of Guests:
+        <mat-form-field class="half-width">
+        	<mat-form-field class="half-width">
+        	<mat-select formControlName="noofguests" placeholder="Number Of Guests" required>
+			    <mat-option *ngFor="let count of guestcounts" [value]="count">
+			      {{count}}
+			    </mat-option>
+		  	</mat-select>
+          	<mat-error *ngIf="formErrors.noofguests">{{formErrors.noofguests}}</mat-error>
+        </mat-form-field>
+        
+        Time:
+        <mat-form-field class="half-width">
+        	<mat-select formControlName="time" placeholder="Select Time" required>
+			    <mat-option *ngFor="let time of timecounts" [value]="time">
+			      {{time}}
+			    </mat-option>
+		  	</mat-select>
+          <mat-error *ngIf="formErrors.time">{{formErrors.time}}</mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="half-width">
+          <input matInput formControlName="telnum" placeholder="Tel. Number" type="tel" pattern="[0-9]*" required>
+          <mat-error *ngIf="formErrors.telnum">{{formErrors.telnum}}</mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width">
+          <input matInput formControlName="email" placeholder="Email" type="email" email required>
+          <mat-error *ngIf="formErrors.email">{{formErrors.email}}</mat-error>
+        </mat-form-field>
+      </p>
+      
+      <table class="form-size">
+        <td>
+          <mat-slide-toggle formControlName="agree">May we contact you?</mat-slide-toggle>
+        </td>
+        <td>
+          <mat-select placeholder="How?" formControlName="contacttype">
+            <mat-option *ngFor="let ctype of contactType" [value]="ctype">
+              {{ ctype }}
+            </mat-option>
+          </mat-select>
+        </td>
+        </table>
+      <p>
+        <mat-form-field class="full-width">
+          <textarea matInput formControlName="message" placeholder="Your Feedback" rows=12></textarea>
+        </mat-form-field>
+      </p>
+      <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="feedbackForm.invalid">Submit</button>
+    </form>
+  </div>
+  <div fxFlex [hidden]="feedback || errMess">
+    <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
+  
+  <div fxFlex *ngIf="errMess">
+    <h2>Error</h2>
+    <h4>{{errMess}}</h4>
+  </div>
+</div>
