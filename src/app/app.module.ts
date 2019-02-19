@@ -18,6 +18,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSliderModule } from '@angular/material/slider';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDatepickerModule, MatNativeDateModule} from '@angular/material';
 
 import 'hammerjs';
 import { HeaderComponent } from './header/header.component';
@@ -74,12 +75,14 @@ import { SearchService } from "./services/search.service";
     MatSlideToggleModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDatepickerModule, 
+    MatNativeDateModule
   ],
   entryComponents: [
     LoginComponent
   ],
-  providers: [ProcessHTTPMsgService, DishService, SearchService,
+  providers: [ProcessHTTPMsgService, DishService, SearchService, MatDatepickerModule,
               {provide: 'BaseURL', useValue: baseURL}
   ],
   bootstrap: [AppComponent]

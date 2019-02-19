@@ -1,3 +1,27 @@
-<p>
-  login works!
-</p>
+<mat-toolbar color="primary">
+    Login
+  <span class="flex-spacer"></span>
+  <button mat-button mat-dialog-close>&times;</button>
+</mat-toolbar>
+<form [formGroup]="loginForm" #lform="ngForm" (ngSubmit)="onSubmit()">
+  	<mat-error *ngIf="loginfailed">Invalid username or password. Please try again</mat-error>
+  <mat-dialog-content>
+    <p>UserName:
+      <mat-form-field>
+        <input matInput placeholder="Username" type="text" formControlName="username" required>
+        <mat-error *ngIf="formErrors.username">{{formErrors.username}}</mat-error>
+      </mat-form-field>
+   </p>
+   <p>Password:
+      <mat-form-field>
+        <input matInput placeholder="Password" type="password" formControlName="password" required>
+        <mat-error *ngIf="formErrors.password">{{formErrors.password}}</mat-error>
+      </mat-form-field>
+    </p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <span class="flex-spacer"></span>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button type="submit" mat-button class="background-primary text-floral-white" [disabled]="loginForm.invalid" >Login</button>
+  </mat-dialog-actions>
+</form>

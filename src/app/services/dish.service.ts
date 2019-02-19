@@ -23,9 +23,7 @@ export class DishService {
         private processHTTPMsgService: ProcessHTTPMsgService) { }
 
       getDishes(restId: number): Observable<Dish[]> {
-          console.log(restId);
           this.searchService.getRestaurant(restId).subscribe(restaurant => {this.restaurant = restaurant; this.dishes = restaurant.dishes}, errmess => this.errMess = <any>errmess);
-          console.log(this.restaurant);
           return of(this.restaurant.dishes);
       }
 }

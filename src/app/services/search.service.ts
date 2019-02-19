@@ -34,7 +34,6 @@ export class SearchService {
     }
     
     getRestaurant(restId: number): Observable<Restaurant> {
-        console.log(restId);
         return this.http.get<Restaurant>(baseURL + 'restaurants/'+restId)
           .pipe(catchError(this.processHTTPMsgService.handleError));
       }

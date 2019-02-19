@@ -1,3 +1,36 @@
-<p>
-  contact works!
-</p>
+<div class="container"
+  fxLayout="column"
+  fxLayoutGap="10px">
+
+  <div fxFlex>
+    <div>
+        <h3>Contact Us</h3>
+        <hr>
+    </div>
+  </div>
+
+  <div fxFlex>
+    <h3>Location Information</h3> 
+    <div fxLayout="column" fxLayout.gt-sm="row">
+      <div fxFlex="50" fxFlexOffset="20px">
+        <h4>Address</h4>
+        <address>
+          Mindtree Limited<br>
+          Rajiv Gandhi infotech park, MIDC,<br>
+          PH1, Hinjewadi, Pune - 411057<br>
+          India<br><br>
+          <i class="fa fa-phone"></i>:  +91 20 6792 4000<br>
+          <i class="fa fa-fax"></i>:  +91 20 6792 4000<br>
+          <i class="fa fa-envelope"></i>: 
+                <a href="mailto:email@mindtree.com">email@mindtree.com</a>
+        </address>
+        <p></p>
+        <div>
+          <a mat-raised-button href="tel:+85212345678"><i class="fa fa-phone"></i> Call</a>
+          <a mat-raised-button><i class="fa fa-skype"></i> Skype</a>
+          <a mat-raised-button href="mailto:email@mindtree.com"><i class="fa fa-envelope-o"></i> Email</a>
+        </div>
+        </div>
+    </div>
+  </div>
+</div>
